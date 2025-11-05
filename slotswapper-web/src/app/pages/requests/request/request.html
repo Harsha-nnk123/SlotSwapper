@@ -1,0 +1,32 @@
+<h2 class="text-xl font-semibold mb-4">Incoming Swap Requests</h2>
+<div class="space-y-3 mb-10" *ngFor="let r of store.incoming()">
+  <div class="p-4 bg-white rounded-xl shadow flex justify-between items-center">
+    <div>
+      <div class="font-medium">{{ r.requester.name }} wants to swap:</div>
+      <div class="text-sm text-slate-600">
+        Your Slot: {{ r.theirSlot.title }} | Their Slot: {{ r.mySlot.title }}
+      </div>
+    </div>
+    <div class="flex gap-2">
+      <button class="btn-green" (click)="respond(r.id, true)">Accept</button>
+      <button class="btn-red" (click)="respond(r.id, false)">Reject</button>
+    </div>
+  </div>
+</div>
+
+<h2 class="text-xl font-semibold mb-4">My Sent Requests</h2>
+<div class="space-y-3" *ngFor="let r of store.outgoing()">
+  <div class="p-4 bg-white rounded-xl shadow flex justify-between items-center">
+    <div>
+      <div>Your Slot: {{ r.mySlot.title }} → {{ r.theirSlot.title }}</div>
+    </div>
+    <span class="px-2 py-1 rounded text-xs"
+          [ngClass]="{
+            'bg-amber-200 text-amber-800': r.status === 'PENDING',
+            'bg-green-200 text-green-800': r.status === 'ACCEPTED',
+            'bg-red-200 text-red-800': r.status === 'REJECTED'
+          }">
+      {{ r.status }}
+    </span>
+  </div>
+</div>

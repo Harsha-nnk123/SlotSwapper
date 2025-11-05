@@ -1,0 +1,21 @@
+<h2 class="text-xl font-semibold mb-4">Marketplace</h2>
+
+<!-- Select user's swappable slot -->
+<div class="mb-4">
+  <label class="block text-sm font-medium mb-1">Choose one of your SWAPPABLE slots:</label>
+  <select class="select" [(ngModel)]="selectedMySlot">
+    <option [ngValue]="null">-- Select --</option>
+    <option *ngFor="let m of mySlots" [value]="m.id">{{ m.title }}</option>
+  </select>
+</div>
+
+<!-- List marketplace slots -->
+<div class="grid md:grid-cols-2 gap-4">
+  <div *ngFor="let e of swappable" class="card p-4 flex justify-between items-center">
+    <div>
+      <div class="font-medium">{{ e.title }}</div>
+      <div class="text-sm text-slate-600">{{ e.startTime }} → {{ e.endTime }}</div>
+    </div>
+    <button class="btn-green" (click)="request(e.id)">Request Swap</button>
+  </div>
+</div>

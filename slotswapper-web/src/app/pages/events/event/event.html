@@ -1,0 +1,52 @@
+<h2 class="text-2xl font-semibold mb-6">My Events</h2>
+
+<form (ngSubmit)="save()" class="space-y-4 max-w-md bg-white p-6 rounded-xl shadow mb-8">
+  <div>
+    <label class="form-label">Title</label>
+    <input type="text" [(ngModel)]="form.title" name="title" class="form-input" required />
+  </div>
+
+  <div>
+    <label class="form-label">Start Time</label>
+    <input type="datetime-local" [(ngModel)]="form.startTime" name="startTime" class="form-input" required />
+  </div>
+
+  <div>
+    <label class="form-label">End Time</label>
+    <input type="datetime-local" [(ngModel)]="form.endTime" name="endTime" class="form-input" required />
+  </div>
+
+  <div>
+    <label class="form-label">Status</label>
+    <select [(ngModel)]="form.status" name="status" class="form-input" required>
+      <option value="BUSY">BUSY</option>
+      <option value="SWAPPABLE">SWAPPABLE</option>
+    </select>
+  </div>
+
+  <button class="btn-primary w-full">Save Event</button>
+</form>
+
+<div class="grid md:grid-cols-2 gap-4">
+  <div *ngFor="let e of events" class="p-4 bg-white rounded-xl shadow flex items-center gap-3">
+
+    <div class="w-10 h-10 rounded-xl bg-blue-100 text-blue-800 grid place-items-center font-semibold">
+      {{ e.title.charAt(0) }}
+    </div>
+
+    <div>
+      <div class="font-medium">{{ e.title }}</div>
+      <div class="text-sm text-slate-600">{{ e.startTime }} → {{ e.endTime }}</div>
+    </div>
+
+    <span class="ml-auto px-2 py-1 rounded text-xs"
+          [ngClass]="{
+            'bg-slate-300 text-slate-800': e.status === 'BUSY',
+            'bg-green-200 text-green-800': e.status === 'SWAPPABLE',
+            'bg-amber-200 text-amber-800': e.status === 'SWAP_PENDING'
+          }">
+      {{ e.status }}
+    </span>
+
+  </div>
+</div>

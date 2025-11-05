@@ -1,0 +1,50 @@
+<div class="flex min-h-screen bg-gray-50">
+  <!-- Sidebar -->
+  <aside class="bg-white border-r shadow-sm transition-all duration-300 overflow-hidden"
+         [class.w-16]="collapsed" [class.w-60]="!collapsed">
+
+    <!-- Header -->
+    <div class="flex items-center justify-between px-4 py-4 border-b">
+      <div class="text-xl font-bold text-blue-700 whitespace-nowrap" *ngIf="!collapsed">
+        SlotSwapper
+      </div>
+      <button class="text-blue-700 text-lg" (click)="collapsed = !collapsed">☰</button>
+    </div>
+
+    <!-- Menu -->
+    <nav class="px-2 py-4 text-sm font-medium space-y-1">
+
+      <a routerLink="/dashboard" routerLinkActive="!collapsed ? 'bg-blue-50 text-blue-700' : 'text-blue-700'"
+         class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-blue-50 transition">
+        <span>🏠</span><span *ngIf="!collapsed">Dashboard</span>
+      </a>
+
+      <a routerLink="/events" routerLinkActive="!collapsed ? 'bg-blue-50 text-blue-700' : 'text-blue-700'"
+         class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-blue-50 transition">
+        <span>📅</span><span *ngIf="!collapsed">My Events</span>
+      </a>
+
+      <a routerLink="/market" routerLinkActive="!collapsed ? 'bg-blue-50 text-blue-700' : 'text-blue-700'"
+         class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-blue-50 transition">
+        <span>🔁</span><span *ngIf="!collapsed">Marketplace</span>
+      </a>
+
+      <a routerLink="/requests" routerLinkActive="!collapsed ? 'bg-blue-50 text-blue-700' : 'text-blue-700'"
+         class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-blue-50 transition">
+        <span>📨</span><span *ngIf="!collapsed">Requests</span>
+      </a>
+
+      <button (click)="logout()"
+              class="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-red-50 text-red-600 transition cursor-pointer">
+        <span>🚪</span><span *ngIf="!collapsed">Logout</span>
+      </button>
+
+    </nav>
+
+  </aside>
+
+  <!-- Main Content -->
+  <main class="flex-1 p-6">
+    <router-outlet></router-outlet>
+  </main>
+</div>
